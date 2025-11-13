@@ -1,53 +1,43 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-	kotlin("jvm") version "2.2.21"
-	kotlin("plugin.spring") version "2.2.21"
-	id("org.springframework.boot") version "3.5.7"
-	id("io.spring.dependency-management") version "1.1.7"
-	kotlin("plugin.jpa") version "2.2.21"
+    id("org.springframework.boot") version "3.2.0"
+    id("io.spring.dependency-management") version "1.1.3"
+    kotlin("jvm") version "1.9.10"
+    kotlin("plugin.spring") version "1.9.10"
 }
 
-group = "space.harbour"
+group = "space.harbour.coffee"
 version = "0.0.1-SNAPSHOT"
-description = "Learning project for Spring Boot"
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(23)
-	}
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("io.github.oshai:kotlin-logging-jvm:7.0.13")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    runtimeOnly("com.h2database:h2")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
-	testImplementation("io.kotest:kotest-assertions-core:5.8.0")
-	testImplementation("io.kotest:kotest-extensions-spring:5.8.0")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict")
-	}
-}
-
-allOpen {
-	annotation("jakarta.persistence.Entity")
-	annotation("jakarta.persistence.MappedSuperclass")
-	annotation("jakarta.persistence.Embeddable")
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjsr305=strict"
+        jvmTarget = "17"
+    }
 }
 
 tasks.withType<Test> {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

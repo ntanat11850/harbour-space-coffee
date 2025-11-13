@@ -1,4 +1,4 @@
-package space.harbour.coffee
+package space.harbour.kotlin
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class HarbourSpaceCoffeeApplication
 
 fun main(args: Array<String>) {
-	runApplication<HarbourSpaceCoffeeApplication>(*args)
+    runApplication<HarbourSpaceCoffeeApplication>(*args)
 }
